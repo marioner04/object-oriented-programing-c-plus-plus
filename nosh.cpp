@@ -6,8 +6,6 @@ using namespace std;
 int main() {
     cout << "Random Dice Generator" << endl;
     srand(time(0));
-    int max_number = 6;
-    int min_number = 0;
     char roll = 'y' and 'n';
 
     string run_again = "yes";
