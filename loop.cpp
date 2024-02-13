@@ -7,7 +7,7 @@ int maincc() {
     while (run_again == "yes") {
         cout << "Number?\n";
         cin >> n;
-        if (n% 2 == 0) {
+        if (n % 2 == 0) {
             cout << "n is even\n";
         } else {
             cout << "n is odd\n";

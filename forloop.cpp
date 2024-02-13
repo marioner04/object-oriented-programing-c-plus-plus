@@ -10,7 +10,7 @@ int main() {
     printf("%c\n", a[3]);
     printf("%c\n", a[4]);
 
-     // Loop - star, end, update
+     // Loop - start, end, update
 
     for(int i = 0; i < 5; i++) {
         printf("%c\n",a[i]);
