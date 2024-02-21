@@ -35,19 +35,19 @@ string select(string func_type) {
     string out = "";
 
     if (func_type == "sum") {
-        out = "The sum is: ";
+        cout << "The sum is: " << endl;
     }
     else if (func_type == "division") {
-        out = "The quotient is: ";
+        cout << "The quotient is: " << endl;
     }
     else if (func_type == "comparison") {
-        out = "The first value is greater than the second value: "; 
+        cout << "The first value is greater than the second value: " << endl; 
     }
     else {
-        out = "The input is invalid\n";
+        cout << "The input is invalid\n" << endl;
     }
     
-    return out;
+    return 0;
 }
 
 template <typename T>
