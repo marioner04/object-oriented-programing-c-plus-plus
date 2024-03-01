@@ -3,6 +3,7 @@
 
 class Point {
     public: 
+        Point();
         Point (double xval, double yval);
         void move (double dx, double dy);
         double getX() const;
