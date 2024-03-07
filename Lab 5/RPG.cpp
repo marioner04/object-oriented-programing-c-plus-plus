@@ -9,7 +9,7 @@ RPG::RPG()
     health = 100;
     strength = 10;
     defense = 10;
-    type = "warrior";
+    type = "Warrior";
     skills[0] = "slash";
     skills[1] = "parry";
 }
@@ -23,7 +23,6 @@ RPG::RPG(string name, int health, int strength, int defense, string type)
     this->type = type;
     this->set_skills();
 }
-
 /*
 *@brief sets the skills baised on the RPG's role
 */
@@ -98,3 +97,7 @@ const int RPG::get_defense()
     return defense;
 }
 
+const string RPG::get_type()
+{
+    return type;
+}

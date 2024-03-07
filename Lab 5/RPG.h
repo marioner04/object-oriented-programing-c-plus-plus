@@ -11,7 +11,7 @@ class RPG {
     public:
         //constructors
         RPG();
-        RPG(string name, int health, int strength, int defene, string type);
+        RPG(string name, int health, int strength, int defense, string type);
 
         void set_skills();
         void print_action(string, RPG);
@@ -24,6 +24,7 @@ class RPG {
         const int get_health();
         const int get_strength();
         const int get_defense();
+        const string get_type();
 
 
 
