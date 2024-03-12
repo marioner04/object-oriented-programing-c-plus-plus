@@ -1,4 +1,5 @@
 #include "RPG.h"
+#include <iostream>
 
 using namespace std;
 
@@ -6,7 +7,7 @@ using namespace std;
 RPG::RPG()
 {
     name = "NPC";
-    health = 100;
+    health = 0;
     strength = 10;
     defense = 10;
     type = "Warrior";
@@ -74,7 +75,12 @@ void RPG::use_skill(RPG *)
 */
 const bool RPG::is_alive()
 {
-    return health > 0;
+    if (health > 0) {
+        cout << "Player is alive" << endl;
+    } else {
+        cout << "Player is dead" << endl;
+    }
+    return health;
 }
 
 const string RPG::get_name()
