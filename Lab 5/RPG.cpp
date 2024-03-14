@@ -59,12 +59,28 @@ void RPG::update_health(int new_health)
     health = new_health;
 }
 
-void RPG::attack(RPG *)
+void RPG::attack(RPG *opponent)
 {
+    int opp_health = (*opponent).get_health();
+    int opp_def = (*opponent).get_defense();
+    int new_health = opp_health - (strength - opp_def);
+
+    (*opponent).update_health(new_health);
 }
 
-void RPG::use_skill(RPG *)
+void RPG::use_skill(RPG *opponent)
 {
+    for (int i = 0; i<SKILL_SIZE; i++) {
+        ;
+    }
+
+    int chosen_skill_index;
+    cout << ""; 
+    cin >> chosen_skill_index;
+    
+
+    string chosen_skill = skills[chosen_skill_index];
+
 }
 
 /**

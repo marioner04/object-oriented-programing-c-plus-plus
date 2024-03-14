@@ -16,8 +16,8 @@ class RPG {
         void set_skills();
         void print_action(string, RPG);
         void update_health(int);
-        void attack(RPG *);
-        void use_skill(RPG *);
+        void attack(RPG *opponent);
+        void use_skill(RPG *opponent);
 
         const bool is_alive();
         const string get_name();
