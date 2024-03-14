@@ -1,4 +1,5 @@
 #include "RPG.h"
+#include <iostream>
 
 using namespace std;
 
@@ -75,7 +76,12 @@ void RPG::use_skill(RPG *)
 */
 const bool RPG::is_alive()
 {
-    return health > 0;
+    if (health > 0) {
+        cout << "Player is alive" << endl;
+    } else { 
+        cout << "Player is dead" << endl;
+    }
+    return health;
 }
 
 const string RPG::get_name()
