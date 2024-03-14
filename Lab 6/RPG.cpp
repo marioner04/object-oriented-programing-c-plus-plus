@@ -71,8 +71,6 @@ void RPG::attack(RPG *opponent)
         int opponent_new_health = opponent_health - damage;
         (*opponent).update_health(opponent_new_health);
     } else {
-        opponent_health - 0;
-        (*opponent).update_health(opponent_health);
     }
 }
 

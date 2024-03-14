@@ -5,6 +5,7 @@ using namespace std;
 
 void display_stat(RPG player1, RPG player2)
 {
+    cout << "Wiz Health: " << player1.get_health() << "NPC Health: " << player2.get_health() << endl;
 }
 
 void display_end(RPG player1, RPG player2)
@@ -69,7 +70,6 @@ int main()
     
     game_loop(&p1, &p2);
     display_end(p1, p2);
-    display_stat(p1, p2);
     
 
     return 0;
