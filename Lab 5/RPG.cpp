@@ -3,12 +3,11 @@
 
 using namespace std;
 
-
 RPG::RPG()
 {
     name = "NPC";
     health = 100;
-    strength = 10;
+    strength = 20;
     defense = 10;
     type = "warrior";
     skills[0] = "slash";
@@ -47,8 +46,10 @@ void RPG::set_skills()
 
 void RPG::print_action(string skill, RPG opponent)
 {
-    printf("%s used %s on %s\n", name.c_str(), skill.c_str(), opponent.get_name().c_str());
+    printf("\n%s used %s on %s\n", name.c_str(), skill.c_str(), opponent.get_name().c_str());
+    cout << "-----------------------------------------" << endl;
 }
+
 
 /**
  * @brief updates health into new_health
@@ -60,12 +61,37 @@ void RPG::update_health(int new_health)
     health = new_health;
 }
 
-void RPG::attack(RPG *)
+void RPG::attack(RPG *opponent)
 {
+    int opponent_health = (*opponent).get_health();
+    int opponent_defense = (*opponent).get_defense();
+    int damage = get_strength() - opponent_defense;
+
+    if (damage > 0) {
+        int opponent_new_health = opponent_health - damage;
+        (*opponent).update_health(opponent_new_health);
+    } else {
+        opponent_health - 0;
+        (*opponent).update_health(opponent_health);
+    }
 }
 
-void RPG::use_skill(RPG *)
+void RPG::use_skill(RPG *opponent)
 {
+    for (int i = 0; i <= 1; i++) {
+        printf("Skill %i:  %s\n", i, skills[i].c_str());
+    };
+
+    int chosen_skill_index;
+
+    cout << "Choose a skill to use: Enter 0 or 1\n" << endl;
+    cin >> chosen_skill_index;
+
+    string chosen_skill = skills[chosen_skill_index];
+
+    print_action(chosen_skill, *opponent);
+    
+    attack(opponent);
 }
 
 /**
