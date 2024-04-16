@@ -42,7 +42,7 @@ void vec_gen(string filename, vector<int> &v){
     file.close();
 }
 
-main(){
+int main(){
     vector<int> v;
     vec_gen("10000_numbers.csv", v);
 
