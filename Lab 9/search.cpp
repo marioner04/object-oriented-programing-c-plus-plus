@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <ctime>
+#include <chrono>
 
 using namespace std;
 
@@ -27,7 +27,10 @@ int binary_search(vector<int> &v, int start, int end, int elem){
     } else if (v[mid] < elem){
         return binary_search (v, mid + 1, end, elem);
     } else {
-        return binary_search (v, start, mid - 1, elem);}
+        return binary_search (v, start, mid - 1, elem);
+    }
+
+    return binary_search (v, start, end, elem);
 
 }
 
@@ -42,6 +45,7 @@ void vec_gen(string filename, vector<int> &v){
     file.close();
 }
 
+
 int main(){
     vector<int> v;
     vec_gen("10000_numbers.csv", v);
@@ -51,28 +55,31 @@ int main(){
 
     for(int i = 0; i < elem_to_find.size(); i++){
         int elem = elem_to_find[i];
+        
 
-        clock_t start = clock();
+        auto start = std::chrono::high_resolution_clock::now();
         int index_if_found = iterative_search(v, elem);
-        clock_t end = clock();
+        auto end = std::chrono::high_resolution_clock::now();
 
-        double elapsed_time_in_sec = (double(end - start)/CLOCKS_PER_SEC);
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 
-        cout << "Iterative Search: " << index_if_found << " " << "Time: " << elapsed_time_in_sec << endl;
+        cout << "Iterative Search: " << index_if_found << " " << "Time: " << duration.count() << endl;
 
-    }
+    };
+
 
     cout << "\n";
     for(int i = 0; i < elem_to_find.size(); i++){
         int elem = elem_to_find[i];
-
-        clock_t start = clock();
-        int index_if_found = binary_search(v, 0, v.size() - 1, elem);
-        clock_t end = clock();
-
-        double elapsed_time_in_sec = (double(end - start)/CLOCKS_PER_SEC);
         
-        cout << "Binary Search: " << index_if_found << " " << "Time: " << elapsed_time_in_sec << endl;
+
+        auto start = std::chrono::high_resolution_clock::now();
+        int index_if_found = binary_search(v, 0, v.size() - 1, elem);
+        auto end = std::chrono::high_resolution_clock::now();
+
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+        cout << "Binary Search: " << index_if_found << " " << "Time: " << duration.count() << endl;
 
     }
 
