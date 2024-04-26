@@ -5,6 +5,28 @@
 
 using namespace std;
 
+void write_times(string filename, const vector<double> times, const vector<int> n){
+    ofstream my_file(filename);
+    
+    my_file << "Number of Elements (n)\t Time (microseconds) " << endl;
+    for(int i = 0; i < times.size(); i++){
+        my_file << n[i] << "\t" << times[i] << "\n";
+    }
+    my_file.close();
+    cout << "Wrote to " << filename << endl; 
+} 
+
+double average(const vector<double> a){
+    double sum = 0;
+    for(double i = 0; i < a.size(); i++){
+        sum += i;
+    }
+
+    double average_elements = sum / a.size();
+
+    return average_elements;
+}
+
 int iterative_search(vector<int>v, int elem){
     for(int i = 0; i < v.size(); i++){
         if(v[i] == elem){
@@ -47,14 +69,32 @@ void vec_gen(string filename, vector<int> &v){
 
 
 int main(){
-    vector<int> v;
-    vec_gen("10000_numbers.csv", v);
 
     vector<int> elem_to_find;
     vec_gen("test_elem.csv", elem_to_find);
 
-    for(int i = 0; i < elem_to_find.size(); i++){
+    vector<int> file_sizes;
+    vec_gen("sizes.csv", file_sizes);
+
+    vector<int> v;
+
+    vector<double> times;
+
+    vector<double> avg;
+
+
+    for(int i = 0; i < file_sizes.size(); i++){
+        string filename = to_string(file_sizes[i]) + "_numbers.csv";
+
+        vec_gen(filename, v);
+
+        cout << filename << endl;
+
+        times.clear();
+
+        for(int i = 0; i < elem_to_find.size(); i++){
         int elem = elem_to_find[i];
+        
         
 
         auto start = std::chrono::high_resolution_clock::now();
@@ -62,14 +102,42 @@ int main(){
         auto end = std::chrono::high_resolution_clock::now();
 
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        double duration_double = std::chrono::duration<double>(duration).count();
 
-        cout << "Iterative Search: " << index_if_found << " " << "Time: " << duration.count() << endl;
+        times.push_back(duration.count());
+
+        cout << index_if_found << " " << duration.count() << endl;
+
+        };
+
+        double the_average_times = average(times);
+
+        avg.push_back(the_average_times);
+
+        
 
     };
 
+    write_times("iterativeSearch_times.csv", times, file_sizes);
+
+    avg.clear();
+
+    
+    
+
 
     cout << "\n";
-    for(int i = 0; i < elem_to_find.size(); i++){
+
+    for(int i = 0; i < file_sizes.size(); i++){
+        string filename = to_string(file_sizes[i]) + "_numbers.csv";
+
+        vec_gen(filename, v);
+
+        cout << filename << endl;
+
+        times.clear();
+
+        for(int i = 0; i < elem_to_find.size(); i++){
         int elem = elem_to_find[i];
         
 
@@ -78,10 +146,25 @@ int main(){
         auto end = std::chrono::high_resolution_clock::now();
 
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        double duration_double = std::chrono::duration<double>(duration).count();
 
-        cout << "Binary Search: " << index_if_found << " " << "Time: " << duration.count() << endl;
+        times.push_back(duration.count());
 
-    }
+        cout << index_if_found << " " <<duration.count() << endl;
+
+        }
+
+        double the_average_times = average(times);
+
+        avg.push_back(the_average_times);
+
+        
+
+    };
+
+    write_times("binarySearch_times.csv", times, file_sizes);
+
+    avg.clear();
 
     return 0;
 }

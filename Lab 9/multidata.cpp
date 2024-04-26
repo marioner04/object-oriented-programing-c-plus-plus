@@ -5,7 +5,8 @@
 
 using namespace std;
 
-int iterative_search(vector<int>v, int elem){
+template <typename T>
+int iterative_search(vector<T>v, T elem){
     for(int i = 0; i < v.size(); i++){
         if(v[i] == elem){
             return i;
@@ -15,12 +16,13 @@ int iterative_search(vector<int>v, int elem){
     return -1;
 }
 
-int binary_search(vector<int> &v, int start, int end, int elem){
+template <typename T>
+int binary_search(vector<T> &v, int start, int end, T elem){
     if(start > end){
         return -1;
     }
 
-    int mid = (start + end) /2;
+    T mid = (start + end) /2;
 
     if(v[mid] == elem){
         return mid;
@@ -34,10 +36,10 @@ int binary_search(vector<int> &v, int start, int end, int elem){
 
 }
 
-
-void vec_gen(string filename, vector<int> &v){
+template <typename T>
+void vec_gen(string filename, vector<T> &v){
     ifstream file(filename);
-    int num;
+    T num;
     v.clear();
     while(file.is_open() && file >> num){
         v.push_back(num);
@@ -56,7 +58,6 @@ int main(){
     for(int i = 0; i < elem_to_find.size(); i++){
         int elem = elem_to_find[i];
         
-
         auto start = std::chrono::high_resolution_clock::now();
         int index_if_found = iterative_search(v, elem);
         auto end = std::chrono::high_resolution_clock::now();
@@ -68,10 +69,10 @@ int main(){
     };
 
 
+    
     cout << "\n";
     for(int i = 0; i < elem_to_find.size(); i++){
         int elem = elem_to_find[i];
-        
 
         auto start = std::chrono::high_resolution_clock::now();
         int index_if_found = binary_search(v, 0, v.size() - 1, elem);
@@ -81,7 +82,12 @@ int main(){
 
         cout << "Binary Search: " << index_if_found << " " << "Time: " << duration.count() << endl;
 
-    }
+    };
+
+    vector<double> d;
+    vec_gen("1000_double.csv", d);
+    vector<double> double_to_find;
+    vec_gen("double_to_find.csv", double_to_find);
 
     return 0;
 }
